@@ -1,7 +1,16 @@
-.form-field {
+.form-field,
+.checkbox-field {
   display: flex;
+  margin: 12px clamp(8px, 2vw, 2rem);
+}
+
+.form-field {
   flex-direction: column;
-  margin: 8px clamp(8px, 2vw, 2rem);
+}
+
+.checkbox-field {
+  gap: 16px;
+  align-items: center;
 }
 
 .field-columns {
@@ -37,4 +46,9 @@ button {
 
 textarea {
   line-height: 1.5;
+}
+
+input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
 }
