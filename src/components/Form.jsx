@@ -1,4 +1,5 @@
 import { Field } from "./Field";
+import "../styles/form.css";
 
 export function Form({ onSubmit }) {
   function handleFormSubmit(e) {
@@ -8,7 +9,7 @@ export function Form({ onSubmit }) {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <fieldset>
+      <fieldset className="field-columns">
         <legend>Personal Information</legend>
         <Field id="first-name" type="text" placeholder="Jane">
           First Name:{" "}
@@ -23,40 +24,48 @@ export function Form({ onSubmit }) {
           Phone:{" "}
         </Field>
       </fieldset>
+
       <fieldset>
         <legend>Education</legend>
-        <Field id="school" type="text" placeholder="Example University">
+        <Field id="school" type="text" placeholder="The Autopsy of Jane Doe">
           School:{" "}
         </Field>
-        <Field id="degree" type="text" placeholder="Bachelors of Arts">
-          Degree:{" "}
-        </Field>
-        <Field id="major" type="text" placeholder="Liberal Arts">
-          Major:{" "}
-        </Field>
-        <Field id="school-start" type="date">
-          Start:{" "}
-        </Field>
-        <Field id="school-end" type="date">
-          End:{" "}
-        </Field>
+        <div className="field-columns">
+          <Field id="degree" type="text" placeholder="Bachelors of Arts">
+            Degree:{" "}
+          </Field>
+          <Field id="major" type="text" placeholder="Liberal Arts">
+            Major:{" "}
+          </Field>
+          <Field id="school-start" type="date">
+            Start:{" "}
+          </Field>
+          <Field id="school-end" type="date">
+            End:{" "}
+          </Field>
+        </div>
       </fieldset>
+
       <fieldset>
         <legend>Work Experience</legend>
-        <Field id="company" type="text">
-          Company:{" "}
-        </Field>
-        <Field id="position" type="text">
-          Position:{" "}
-        </Field>
-        <label htmlFor="job-desc">Description: </label>
-        <textarea id="job-desc" rows="8" cols="100"></textarea>
-        <Field id="work-start" type="date">
-          Start:{" "}
-        </Field>
-        <Field id="work-end" type="date">
-          End:{" "}
-        </Field>
+        <div className="field-columns">
+          <Field id="company" type="text" placeholder="Jane's Company">
+            Company:{" "}
+          </Field>
+          <Field id="position" type="text" placeholder="Jane's Position">
+            Position:{" "}
+          </Field>
+          <Field id="work-start" type="date">
+            Start:{" "}
+          </Field>
+          <Field id="work-end" type="date">
+            End:{" "}
+          </Field>
+        </div>
+        <div className="form-field">
+          <label htmlFor="job-desc">Description: </label>
+          <textarea id="job-desc" rows="7" cols="10"></textarea>
+        </div>
       </fieldset>
       <button type="submit">Submit</button>
     </form>
