@@ -1,11 +1,22 @@
-import { useState } from "react";
 import { Field } from "./Field";
 
-export function SchoolEntry({ id, handleClick }) {
-  const [isAttending, setIsAttending] = useState(false);
+const SECTION = "education";
+export function SchoolEntry({ schoolData, handleClick, handleUpdate }) {
+  const { id, school, degree, major, startDate, endDate, isAttending } =
+    schoolData;
+
+  function onCheck(e) {
+    const checked = e.target.checked;
+    handleUpdate(SECTION, id, "isAttending", e);
+
+    if (checked) {
+      // Clear the end date when currently attending
+      handleUpdate(SECTION, id, "endDate", { target: { value: "" } });
+    }
+  }
 
   function onClick() {
-    handleClick("education", id);
+    handleClick(SECTION, id);
   }
 
   return (
@@ -14,45 +25,67 @@ export function SchoolEntry({ id, handleClick }) {
         id={`school-${id}`}
         type="text"
         placeholder="The Autopsy of Jane Doe"
+        value={school}
+        onChange={(e) => handleUpdate(SECTION, id, "school", e)}
       >
         School:{" "}
       </Field>
 
       <div className="field-columns">
-        <Field id={`degree-${id}`} type="text" placeholder="Bachelors of Arts">
+        <Field
+          id={`degree-${id}`}
+          type="text"
+          placeholder="Bachelors of Arts"
+          value={degree}
+          onChange={(e) => handleUpdate(SECTION, id, "degree", e)}
+        >
           Degree:{" "}
         </Field>
 
-        <Field id={`major-${id}`} type="text" placeholder="Liberal Arts">
+        <Field
+          id={`major-${id}`}
+          type="text"
+          placeholder="Liberal Arts"
+          value={major}
+          onChange={(e) => handleUpdate(SECTION, id, "major", e)}
+        >
           Major:{" "}
         </Field>
 
-        <Field id={`school-start-${id}`} type="date">
+        <Field
+          id={`school-start-${id}`}
+          type="date"
+          value={startDate}
+          onChange={(e) => handleUpdate(SECTION, id, "startDate", e)}
+        >
           Start:{" "}
         </Field>
 
         {!isAttending && (
-          <Field id={`school-end-${id}`} type="date">
+          <Field
+            id={`school-end-${id}`}
+            type="date"
+            value={endDate}
+            onChange={(e) => handleUpdate(SECTION, id, "endDate", e)}
+          >
             End:{" "}
           </Field>
         )}
       </div>
 
-      <div className="field-margin input-button-group">
-        <div className="checkbox-field">
-          <input
-            id={`has-graduated-${id}`}
-            type="checkbox"
-            checked={isAttending}
-            onChange={(e) => setIsAttending(e.target.checked)}
-          />
-          <label htmlFor={`has-graduated-${id}`}>I currently attend</label>
-        </div>
-
-        <button type="button" onClick={onClick}>
-          Remove
-        </button>
+      <div className="checkbox-field field-margin">
+        <input
+          id={`has-graduated-${id}`}
+          type="checkbox"
+          checked={isAttending}
+          onChange={onCheck}
+        />
+        <label htmlFor={`has-graduated-${id}`}>I currently attend</label>
       </div>
+
+      <button type="button" className="field-margin remove" onClick={onClick}>
+        Remove
+      </button>
     </div>
   );
 }

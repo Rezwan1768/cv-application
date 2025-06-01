@@ -9,6 +9,7 @@ export function Form({
   onUpdatePersonal,
   onAddArrayItem,
   onDeleteArrayItem,
+  onUpdateArrayItem,
 }) {
   function handleFormSubmit(e) {
     e.preventDefault();
@@ -82,15 +83,13 @@ export function Form({
         {schools.map((school) => (
           <SchoolEntry
             key={school.id}
-            id={school.id}
+            schoolData={school}
             handleClick={onDeleteArrayItem}
+            handleUpdate={onUpdateArrayItem}
           />
         ))}
-        <button
-          type="button"
-          className="field-margin"
-          onClick={handleAddSchool}
-        >
+
+        <button type="button" className="add" onClick={handleAddSchool}>
           Add
         </button>
       </fieldset>
@@ -98,12 +97,19 @@ export function Form({
       <fieldset>
         <legend>Work Experience</legend>
         {jobs.map((job) => (
-          <WorkEntry key={job.id} id={job.id} handleClick={onDeleteArrayItem} />
+          <WorkEntry
+            key={job.id}
+            jobData={job}
+            handleClick={onDeleteArrayItem}
+            handleUpdate={onUpdateArrayItem}
+          />
         ))}
-        <button type="button" className="field-margin" onClick={handleAddJob}>
+
+        <button type="button" className="add" onClick={handleAddJob}>
           Add
         </button>
       </fieldset>
+
       <button type="submit" onClick={onSubmit}>
         Submit
       </button>

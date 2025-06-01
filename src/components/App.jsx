@@ -6,7 +6,15 @@ export function App() {
   const [formData, setFormData] = useState({
     personal: { firstName: "", lastName: "", email: "", phone: "" },
     education: [
-      { id: 1, school: "", degree: "", major: "", startDate: "", endDate: "" },
+      {
+        id: 1,
+        school: "",
+        degree: "",
+        major: "",
+        startDate: "",
+        endDate: "",
+        isAttending: false,
+      },
     ],
     work: [
       {
@@ -15,6 +23,7 @@ export function App() {
         position: "",
         startDate: "",
         endDate: "",
+        isCurrentJob: false,
         description: "",
       },
     ],
@@ -41,12 +50,22 @@ export function App() {
       const newId = Math.max(...prev[section].map((item) => item.id), 0) + 1;
       const newItem =
         section === "education"
-          ? { id: newId, school: "", degree: "", major: "", startDate: "" }
+          ? {
+              id: newId,
+              school: "",
+              degree: "",
+              major: "",
+              startDate: "",
+              endDate: "",
+              isAttending: false,
+            }
           : {
               id: newId,
               company: "",
               position: "",
               startDate: "",
+              endDate: "",
+              isCurrentJob: false,
               description: "",
             };
 
@@ -64,6 +83,27 @@ export function App() {
     }));
   }
 
+  function updateArrayItem(section, id, field, e) {
+    setFormData((prev) => {
+      const updatedSection = prev[section].map((item) => {
+        if (item.id === id) {
+          const value =
+            e.target.type === "checkbox" ? e.target.checked : e.target.value;
+          return {
+            ...item,
+            [field]: value,
+          };
+        }
+        return item;
+      });
+
+      return {
+        ...prev,
+        [section]: updatedSection,
+      };
+    });
+  }
+
   return (
     <>
       <h1>Resume/CV Application</h1>
@@ -74,6 +114,7 @@ export function App() {
           onUpdatePersonal={updatePersonal}
           onAddArrayItem={addArrayItem}
           onDeleteArrayItem={deleteArrayItem}
+          onUpdateArrayItem={updateArrayItem}
         />
       ) : (
         <Resume onClick={handleModeChange} />
