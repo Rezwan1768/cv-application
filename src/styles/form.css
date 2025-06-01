@@ -1,7 +1,6 @@
 .form-field,
 .checkbox-field {
   display: flex;
-  margin: 12px clamp(8px, 2vw, 2rem);
 }
 
 .form-field {
@@ -16,6 +15,10 @@
 .field-columns {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+.field-margin {
+  margin: 12px clamp(8px, 2vw, 2rem);
 }
 
 fieldset {
@@ -51,4 +54,28 @@ textarea {
 input[type="checkbox"] {
   width: 15px;
   height: 15px;
+}
+
+.education-section,
+.work-section {
+  border-top: 1px solid;
+}
+
+.education-section:first-of-type,
+.work-section:first-of-type {
+  border-top: none;
+}
+
+.input-button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 450px) {
+  .input-button-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(8px, 2vw, 2rem);
+  }
 }

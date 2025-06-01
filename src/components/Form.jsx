@@ -1,17 +1,32 @@
 import { Field } from "./Field";
 import { SchoolEntry } from "./SchoolEntry";
+import { WorkEntry } from "./WorkEntry";
 import "../styles/form.css";
-import { useState } from "react";
 
-export function Form({ data, onSubmit, onUpdatePersonal }) {
-  const [isCurrentJob, setIsCurrentJob] = useState(false);
-
+export function Form({
+  data,
+  onSubmit,
+  onUpdatePersonal,
+  onAddArrayItem,
+  onDeleteArrayItem,
+}) {
   function handleFormSubmit(e) {
     e.preventDefault();
     onSubmit();
   }
 
+  function handleAddSchool() {
+    onAddArrayItem("education");
+  }
+
+  function handleAddJob() {
+    onAddArrayItem("work");
+  }
+
   const { firstName, lastName, email, phone } = data.personal;
+  const schools = data.education;
+  const jobs = data.work;
+
   return (
     <form onSubmit={handleFormSubmit}>
       <fieldset className="field-columns">
@@ -26,6 +41,7 @@ export function Form({ data, onSubmit, onUpdatePersonal }) {
         >
           First Name:{" "}
         </Field>
+
         <Field
           id="last-name"
           type="text"
@@ -36,6 +52,7 @@ export function Form({ data, onSubmit, onUpdatePersonal }) {
         >
           Last Name:{" "}
         </Field>
+
         <Field
           id="email"
           type="email"
@@ -46,6 +63,7 @@ export function Form({ data, onSubmit, onUpdatePersonal }) {
         >
           Email:{" "}
         </Field>
+
         <Field
           id="phone"
           type="tel"
@@ -60,42 +78,35 @@ export function Form({ data, onSubmit, onUpdatePersonal }) {
 
       <fieldset>
         <legend>Education</legend>
-        <SchoolEntry />
+
+        {schools.map((school) => (
+          <SchoolEntry
+            key={school.id}
+            id={school.id}
+            handleClick={onDeleteArrayItem}
+          />
+        ))}
+        <button
+          type="button"
+          className="field-margin"
+          onClick={handleAddSchool}
+        >
+          Add
+        </button>
       </fieldset>
 
       <fieldset>
         <legend>Work Experience</legend>
-        <div className="field-columns">
-          <Field id="company" type="text" placeholder="Jane's Company">
-            Company:{" "}
-          </Field>
-          <Field id="position" type="text" placeholder="Jane's Position">
-            Position:{" "}
-          </Field>
-          <Field id="work-start" type="date">
-            Start:{" "}
-          </Field>
-          {!isCurrentJob && (
-            <Field id="work-end" type="date">
-              End:{" "}
-            </Field>
-          )}
-        </div>
-        <div className="checkbox-field">
-          <input
-            id="current-job"
-            type="checkbox"
-            checked={isCurrentJob}
-            onChange={(e) => setIsCurrentJob(e.target.checked)}
-          />
-          <label htmlFor="current-job">I currently work here</label>
-        </div>
-        <div className="form-field">
-          <label htmlFor="job-desc">Description: </label>
-          <textarea id="job-desc" rows="7" cols="10"></textarea>
-        </div>
+        {jobs.map((job) => (
+          <WorkEntry key={job.id} id={job.id} handleClick={onDeleteArrayItem} />
+        ))}
+        <button type="button" className="field-margin" onClick={handleAddJob}>
+          Add
+        </button>
       </fieldset>
-      <button type="submit">Submit</button>
+      <button type="submit" onClick={onSubmit}>
+        Submit
+      </button>
     </form>
   );
 }

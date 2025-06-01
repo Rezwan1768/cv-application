@@ -5,12 +5,22 @@ import { Resume } from "./Resume";
 export function App() {
   const [formData, setFormData] = useState({
     personal: { firstName: "", lastName: "", email: "", phone: "" },
-    education: [{ id: 1, school: "", degree: "", major: "", startDate: "" }],
+    education: [
+      { id: 1, school: "", degree: "", major: "", startDate: "", endDate: "" },
+    ],
     work: [
-      { id: 1, company: "", position: "", startDate: "", description: "" },
+      {
+        id: 1,
+        company: "",
+        position: "",
+        startDate: "",
+        endDate: "",
+        description: "",
+      },
     ],
   });
 
+  // Used to toggle between the form and resume
   const [isEditMode, setIsEditMode] = useState(true);
 
   function handleModeChange() {
@@ -25,6 +35,35 @@ export function App() {
     }));
   }
 
+  // Allow adding new school or job (depends on the value of section)
+  function addArrayItem(section) {
+    setFormData((prev) => {
+      const newId = Math.max(...prev[section].map((item) => item.id), 0) + 1;
+      const newItem =
+        section === "education"
+          ? { id: newId, school: "", degree: "", major: "", startDate: "" }
+          : {
+              id: newId,
+              company: "",
+              position: "",
+              startDate: "",
+              description: "",
+            };
+
+      return {
+        ...prev,
+        [section]: [...prev[section], newItem],
+      };
+    });
+  }
+
+  function deleteArrayItem(section, id) {
+    setFormData((prev) => ({
+      ...prev,
+      [section]: prev[section].filter((item) => item.id !== id),
+    }));
+  }
+
   return (
     <>
       <h1>Resume/CV Application</h1>
@@ -33,6 +72,8 @@ export function App() {
           data={formData}
           onSubmit={handleModeChange}
           onUpdatePersonal={updatePersonal}
+          onAddArrayItem={addArrayItem}
+          onDeleteArrayItem={deleteArrayItem}
         />
       ) : (
         <Resume onClick={handleModeChange} />
