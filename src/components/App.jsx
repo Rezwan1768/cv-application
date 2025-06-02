@@ -4,25 +4,30 @@ import { Resume } from "./Resume";
 
 export function App() {
   const [formData, setFormData] = useState({
-    personal: { firstName: "", lastName: "", email: "", phone: "" },
+    personal: {
+      firstName: "Jane",
+      lastName: "Doe",
+      email: "janedoe@example.com",
+      phone: "123-456-7890",
+    },
     education: [
       {
         id: 1,
-        school: "",
-        degree: "",
-        major: "",
-        startDate: "",
-        endDate: "",
+        school: "The Autopsy of Jane Doe",
+        degree: "Bachelor's of Arts",
+        major: "Liberal Arts",
+        startDate: "2021-06-01",
+        endDate: "2025-09-07",
         isAttending: false,
       },
     ],
     work: [
       {
         id: 1,
-        company: "",
-        position: "",
-        startDate: "",
-        endDate: "",
+        company: "Tilden Morgue and Crematorium",
+        position: "Medical Examiner",
+        startDate: "2021-06-01",
+        endDate: "2025-09-07",
         isCurrentJob: false,
         description: "",
       },
@@ -106,7 +111,6 @@ export function App() {
 
   return (
     <>
-      <h1>Resume/CV Application</h1>
       {isEditMode ? (
         <Form
           data={formData}
@@ -117,7 +121,7 @@ export function App() {
           onUpdateArrayItem={updateArrayItem}
         />
       ) : (
-        <Resume onClick={handleModeChange} />
+        <Resume formData={formData} onClick={handleModeChange} />
       )}
     </>
   );

@@ -31,7 +31,6 @@ export function WorkEntry({ jobData, handleClick, handleUpdate }) {
         <Field
           id={`company-${id}`}
           type="text"
-          placeholder="Jane's Company"
           value={company}
           onChange={(e) => handleUpdate(SECTION, id, "company", e)}
         >
@@ -41,7 +40,6 @@ export function WorkEntry({ jobData, handleClick, handleUpdate }) {
         <Field
           id={`position-${id}`}
           type="text"
-          placeholder="Jane's Position"
           value={position}
           onChange={(e) => handleUpdate(SECTION, id, "position", e)}
         >
