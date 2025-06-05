@@ -110,9 +110,7 @@ export function Form({
           </button>
         </fieldset>
 
-        <button type="submit" onClick={onSubmit}>
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
     </>
   );
