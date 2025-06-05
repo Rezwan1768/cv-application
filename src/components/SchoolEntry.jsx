@@ -24,6 +24,7 @@ export function SchoolEntry({ schoolData, handleClick, handleUpdate }) {
       <Field
         id={`school-${id}`}
         type="text"
+        required
         value={school}
         onChange={(e) => handleUpdate(SECTION, id, "school", e)}
       >
@@ -34,6 +35,7 @@ export function SchoolEntry({ schoolData, handleClick, handleUpdate }) {
         <Field
           id={`degree-${id}`}
           type="text"
+          required
           value={degree}
           onChange={(e) => handleUpdate(SECTION, id, "degree", e)}
         >
@@ -43,6 +45,7 @@ export function SchoolEntry({ schoolData, handleClick, handleUpdate }) {
         <Field
           id={`major-${id}`}
           type="text"
+          required
           value={major}
           onChange={(e) => handleUpdate(SECTION, id, "major", e)}
         >

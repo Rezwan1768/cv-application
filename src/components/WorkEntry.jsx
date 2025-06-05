@@ -31,6 +31,7 @@ export function WorkEntry({ jobData, handleClick, handleUpdate }) {
         <Field
           id={`company-${id}`}
           type="text"
+          required
           value={company}
           onChange={(e) => handleUpdate(SECTION, id, "company", e)}
         >
@@ -40,6 +41,7 @@ export function WorkEntry({ jobData, handleClick, handleUpdate }) {
         <Field
           id={`position-${id}`}
           type="text"
+          required
           value={position}
           onChange={(e) => handleUpdate(SECTION, id, "position", e)}
         >

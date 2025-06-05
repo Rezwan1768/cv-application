@@ -60,6 +60,7 @@ export function Form({
             id="email"
             type="email"
             name="email"
+            required
             value={email}
             onChange={onUpdatePersonal}
           >
@@ -70,6 +71,7 @@ export function Form({
             id="phone"
             type="tel"
             name="phone"
+            required
             value={phone}
             onChange={onUpdatePersonal}
           >
