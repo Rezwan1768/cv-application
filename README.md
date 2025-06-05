@@ -1,12 +1,14 @@
-# React + Vite
+# CV/Resume Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is my first full React project, built after formally learning about React concepts like **state**, **lifting state up**, and **component-based architecture**. While I had used React before, this is the first time I built something with a solid understanding of how React works under the hood.
 
-Currently, two official plugins are available:
+## 🎯 Purpose
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The goal of this project was to solidify my understanding of:
 
-## Expanding the ESLint configuration
+- Managing local component state
+- Lifting state up to share data between components
+- Handling form input and updates
+- Passing props effectively
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This project isn't intended to be perfect or production-ready — it's primarily a **learning exercise** to put my new React skills into practice.
